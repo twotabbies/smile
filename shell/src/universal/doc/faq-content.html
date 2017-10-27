@@ -60,7 +60,9 @@
     &lt;/dependency&gt;
     </code></pre>
     <p>and also make their machine-optimised libblas3 (CBLAS) and liblapack3 (Fortran)
-        available as shared libraries at runtime.</p>
+        available as shared libraries at runtime. This module employs the highly efficient
+        <a href="https://github.com/fommil/netlib-java#netlib-java">netlib-java</a>
+        library.</p>
 
     <h3>OS X</h3>
     <p>Apple OS X requires no further setup as it ships with the veclib framework.</p>
@@ -88,8 +90,7 @@
         is possible to build ATLAS.</p>
 
     <h2 class="question" id="model-serialization">Model serialization</h2>
-    <p class="answer">
-        To serialize a model, you may use</p>
+    <p class="answer">To serialize a model, you may use</p>
     <pre class="prettyprint lang-scala"><code>
     write(model, file)
     </code></pre>

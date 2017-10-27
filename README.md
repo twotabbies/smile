@@ -44,7 +44,8 @@ the dependency of smile-netlib:
     </dependency>
 ```
 and also make their machine-optimized libblas3 (CBLAS) and liblapack3 (Fortran)
-available as shared libraries at runtime.
+available as shared libraries at runtime. This module employs the highly efficient
+[netlib-java](https://github.com/fommil/netlib-java#netlib-java) library.
 
 OS X
 ----
@@ -68,9 +69,10 @@ or use Debian's alternatives system.
 Windows
 -------
 The native_system builds expect to find libblas3.dll and liblapack3.dll
-on the %PATH% (or current working directory). Besides vendor-supplied
-implementations, OpenBLAS provide generically tuned binaries, and it
-is possible to build ATLAS.
+on the %PATH% (or current working directory). Smile ships a prebuilt
+[OpenBLAS](http://www.openblas.net/).
+The users can also install vendor-supplied implementations, which may
+offer better performance.
 
 Smile comes with an interactive shell. Download pre-packaged Smile from the [releases page](https://github.com/haifengl/smile/releases).
 In the home directory of Smile, type
@@ -79,14 +81,14 @@ In the home directory of Smile, type
 ```
 to enter the shell, which is based on Scala interpreter. So you can run any valid Scala expressions in the shell.
 In the simplest case, you can use it as a calculator. Besides, all high-level Smile operators are predefined
-in the shell. Be default, the shell uses up to 4GB memory. If you need more memory to handle large data,
+in the shell. By default, the shell uses up to 4GB memory. If you need more memory to handle large data,
 use the option `-J-Xmx`. For example,
 
 ```
     ./bin/smile -J-Xmx8192M
 ```
 You can also modify the configuration file `./conf/application.ini` for the memory and other JVM settings.
-For detailed helps, checkout the [project website](http://haifengl.github.io/smile/).
+For detailed help, checkout the [project website](http://haifengl.github.io/smile/).
 
 Smile implements the following major machine learning algorithms:
 
@@ -123,7 +125,7 @@ Sentence Splitter and Tokenizer, Bigram Statistical Test, Phrase Extractor, Keyw
 Model Serialization
 ===================
 Most models support the Java `Serializable` interface (all classifiers do support `Serializable` interface) so that
-you can use them in Spark. To reading/writing the models in non-Java code, we suggest [XStream](http://xstream.codehaus.org) to serialize the trained models.
+you can use them in Spark. For reading/writing the models in non-Java code, we suggest [XStream](http://xstream.codehaus.org) to serialize the trained models.
 XStream is a simple library to serialize objects to XML and back again. XStream is easy to use and doesn't require mappings
 (actually requires no modifications to objects). [Protostuff](http://code.google.com/p/protostuff/) is a
 nice alternative that supports forward-backward compatibility (schema evolution) and validation.

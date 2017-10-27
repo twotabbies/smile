@@ -23,18 +23,19 @@ import smile._
 import smile.util._
 import smile.math._
 import java.lang.Math._
-import smile.math.Math.{log2, logistic, factorial, choose, random, randomInt, permutate, sum, mean, median, q1, q3, `var` => variance, sd, mad, min, max, whichMin, whichMax, unique, dot, distance, pdist, KullbackLeiblerDivergence => kld, JensenShannonDivergence => jsd, cov, cor, spearman, kendall, norm, norm1, norm2, normInf, standardize, normalize, rescale, unitize, unitize1, unitize2, root}
+import smile.math.Math.{log2, logistic, factorial, choose, random, randomInt, permutate, c, cbind, rbind, sum, mean, median, q1, q3, `var` => variance, sd, mad, min, max, whichMin, whichMax, unique, dot, distance, pdist, KullbackLeiblerDivergence => kld, JensenShannonDivergence => jsd, cov, cor, spearman, kendall, norm, norm1, norm2, normInf, standardize, normalize, scale, unitize, unitize1, unitize2, root}
 import smile.math.distance._
 import smile.math.kernel._
 import smile.math.matrix._
+import smile.math.matrix.Matrix._
 import smile.stat.distribution._
 import smile.data._
 import java.awt.Color, smile.plot._
 import smile.interpolation._
 import smile.validation._
 import smile.association._
-import smile.regression._
 import smile.classification._
+import smile.regression.{ols, ridge, lasso, svr, gpr}
 import smile.feature._
 import smile.clustering._
 import smile.vq._

@@ -27,7 +27,6 @@ import java.text.ParseException;
 
 import smile.data.Attribute;
 import smile.data.AttributeDataset;
-import smile.data.Datum;
 import smile.data.NumericAttribute;
 
 /**
@@ -202,6 +201,16 @@ public class DelimitedTextParser {
      * @param attributes the list attributes of data in proper order.
      * @throws java.io.FileNotFoundException
      */
+    public AttributeDataset parse(Attribute[] attributes, String path) throws IOException, ParseException {
+        return parse(attributes, new File(path));
+    }
+
+    /**
+     * Parse a dataset from given file.
+     * @param path the file path of data source.
+     * @param attributes the list attributes of data in proper order.
+     * @throws java.io.FileNotFoundException
+     */
     public AttributeDataset parse(String name, Attribute[] attributes, String path) throws IOException, ParseException {
         return parse(name, attributes, new File(path));
     }
@@ -344,9 +353,8 @@ public class DelimitedTextParser {
                 }
             }
 
-            Datum<double[]> datum = new Datum<>(x, y);
+            AttributeDataset.Row datum = Double.isNaN(y) ? data.add(x) : data.add(x, y);
             datum.name = rowName;
-            data.add(datum);
         }
 
         while ((line = reader.readLine()) != null) {
@@ -374,9 +382,8 @@ public class DelimitedTextParser {
                 }
             }
 
-            Datum<double[]> datum = new Datum<>(x, y);
+            AttributeDataset.Row datum = Double.isNaN(y) ? data.add(x) : data.add(x, y);
             datum.name = rowName;
-            data.add(datum);
         }
 
         return data;

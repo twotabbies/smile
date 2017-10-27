@@ -903,6 +903,130 @@ public class Math {
         random.get().permutate(x);
     }
 
+    /** Combines the arguments to form a vector. */
+    public static int[] c(int... x) {
+        return x;
+    }
+
+    /** Combines the arguments to form a vector. */
+    public static float[] c(float... x) {
+        return x;
+    }
+
+    /** Combines the arguments to form a vector. */
+    public static double[] c(double... x) {
+        return x;
+    }
+
+    /** Combines the arguments to form a vector. */
+    public static String[] c(String... x) {
+        return x;
+    }
+
+    /** Merges multiple vectors into one. */
+    public static int[] c(int[]... x) {
+        int n = 0;
+        for (int i = 0; i < x.length; i++) {
+            n += x.length;
+        }
+
+        int[] y = new int[n];
+        for (int i = 0, k = 0; i < x.length; i++) {
+            for (int xi : x[i]) {
+                y[k++] = xi;
+            }
+        }
+        return y;
+    }
+
+    /** Merges multiple vectors into one. */
+    public static float[] c(float[]... x) {
+        int n = 0;
+        for (int i = 0; i < x.length; i++) {
+            n += x.length;
+        }
+
+        float[] y = new float[n];
+        for (int i = 0, k = 0; i < x.length; i++) {
+            for (float xi : x[i]) {
+                y[k++] = xi;
+            }
+        }
+        return y;
+    }
+
+    /** Merges multiple vectors into one. */
+    public static double[] c(double[]... x) {
+        int n = 0;
+        for (int i = 0; i < x.length; i++) {
+            n += x.length;
+        }
+
+        double[] y = new double[n];
+        for (int i = 0, k = 0; i < x.length; i++) {
+            for (double xi : x[i]) {
+                y[k++] = xi;
+            }
+        }
+        return y;
+    }
+
+    /** Merges multiple vectors into one. */
+    public static String[] c(String[]... x) {
+        int n = 0;
+        for (int i = 0; i < x.length; i++) {
+            n += x.length;
+        }
+
+        String[] y = new String[n];
+        for (int i = 0, k = 0; i < x.length; i++) {
+            for (String xi : x[i]) {
+                y[k++] = xi;
+            }
+        }
+        return y;
+    }
+
+    /** Take a sequence of vector arguments and combine by columns. */
+    public static int[] cbind(int[]... x) {
+        return c(x);
+    }
+
+    /** Take a sequence of vector arguments and combine by columns. */
+    public static float[] cbind(float[]... x) {
+        return c(x);
+    }
+
+    /** Take a sequence of vector arguments and combine by columns. */
+    public static double[] cbind(double[]... x) {
+        return c(x);
+    }
+
+    /** Take a sequence of vector arguments and combine by columns. */
+    public static String[] cbind(String[]... x) {
+        return c(x);
+    }
+
+    /** Take a sequence of vector arguments and combine by rows. */
+    public static int[][] rbind(int[]... x) {
+        return x;
+    }
+
+    /** Take a sequence of vector arguments and combine by rows. */
+    public static float[][] rbind(float[]... x) {
+        return x;
+    }
+
+    /** Take a sequence of vector arguments and combine by rows. */
+    public static double[][] rbind(double[]... x) {
+        return x;
+    }
+
+    /** Take a sequence of vector arguments and combine by rows. */
+    public static String[][] rbind(String[]... x) {
+        return x;
+    }
+
     /**
      * Returns a slice of data for given indices.
      */
@@ -977,67 +1101,67 @@ public class Math {
      */
     public static boolean contains(double[][] polygon, double x, double y) {
         if (polygon.length <= 2) {
-	    return false;
-	}
-        
-	int hits = 0;
+            return false;
+        }
+
+        int hits = 0;
 
         int n = polygon.length;
-	double lastx = polygon[n - 1][0];
-	double lasty = polygon[n - 1][1];
-	double curx, cury;
+        double lastx = polygon[n - 1][0];
+        double lasty = polygon[n - 1][1];
+        double curx, cury;
 
-	// Walk the edges of the polygon
-	for (int i = 0; i < n; lastx = curx, lasty = cury, i++) {
-	    curx = polygon[i][0];
-	    cury = polygon[i][1];
+        // Walk the edges of the polygon
+        for (int i = 0; i < n; lastx = curx, lasty = cury, i++) {
+            curx = polygon[i][0];
+            cury = polygon[i][1];
 
-	    if (cury == lasty) {
-		continue;
-	    }
+            if (cury == lasty) {
+                continue;
+            }
 
-	    double leftx;
-	    if (curx < lastx) {
-		if (x >= lastx) {
-		    continue;
-		}
-		leftx = curx;
-	    } else {
-		if (x >= curx) {
-		    continue;
-		}
-		leftx = lastx;
-	    }
+            double leftx;
+            if (curx < lastx) {
+                if (x >= lastx) {
+                    continue;
+                }
+                leftx = curx;
+            } else {
+                if (x >= curx) {
+                    continue;
+                }
+                leftx = lastx;
+            }
 
-	    double test1, test2;
-	    if (cury < lasty) {
-		if (y < cury || y >= lasty) {
-		    continue;
-		}
-		if (x < leftx) {
-		    hits++;
-		    continue;
-		}
-		test1 = x - curx;
-		test2 = y - cury;
-	    } else {
-		if (y < lasty || y >= cury) {
-		    continue;
-		}
-		if (x < leftx) {
-		    hits++;
-		    continue;
-		}
-		test1 = x - lastx;
-		test2 = y - lasty;
-	    }
+            double test1, test2;
+            if (cury < lasty) {
+                if (y < cury || y >= lasty) {
+                    continue;
+                }
+                if (x < leftx) {
+                    hits++;
+                    continue;
+                }
+                test1 = x - curx;
+                test2 = y - cury;
+            } else {
+                if (y < lasty || y >= cury) {
+                    continue;
+                }
+                if (x < leftx) {
+                    hits++;
+                    continue;
+                }
+                test1 = x - lastx;
+                test2 = y - lasty;
+            }
 
-	    if (test1 < (test2 / (lasty - cury) * (lastx - curx))) {
-		hits++;
-	    }
-	}
+            if (test1 < (test2 / (lasty - cury) * (lastx - curx))) {
+                hits++;
+            }
+        }
 
-	return ((hits & 1) != 0);
+        return ((hits & 1) != 0);
     }
 
     /**
@@ -2981,18 +3105,18 @@ public class Math {
     }
 
     /**
-     * Rescales each column of a matrix to range [0, 1].
+     * Scales each column of a matrix to range [0, 1].
      */
-    public static java.util.function.Function<double[], double[]> rescale(double[][] x) {
-        return rescale(x, 0.0, 1.0);
+    public static void scale(double[][] x) {
+        scale(x, 0.0, 1.0);
     }
 
     /**
-     * Rescales each column of a matrix to range [lo, hi].
+     * Scales each column of a matrix to range [lo, hi].
      * @param lo lower limit of range
      * @param hi upper limit of range
      */
-    public static java.util.function.Function<double[], double[]> rescale(double[][] x, double lo, double hi) {
+    public static void scale(double[][] x, double lo, double hi) {
         int n = x.length;
         int p = x[0].length;
 
@@ -3011,31 +3135,12 @@ public class Math {
                 }
             }
         }
-
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double l = hi - lo;
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                double scale = max[j] - min[j];
-                if (!Math.isZero(scale)) {
-                    y[j] = (xi[j] - min[j]) / scale;
-                } else {
-                    y[j] = 0.5;
-                }
-                y[j] = lo + l * y[j];
-            }
-
-            return y;
-        };
     }
 
     /**
      * Standardizes each column of a matrix to 0 mean and unit variance.
      */
-    public static java.util.function.Function<double[], double[]> standardize(double[][] x) {
+    public static void standardize(double[][] x) {
         int n = x.length;
         int p = x[0].length;
 
@@ -3059,34 +3164,25 @@ public class Math {
                 }
             }
         }
+    }
 
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                if (!Math.isZero(scale[j])) {
-                    y[j] = (xi[j] - center[j]) / scale[j];
-                } else {
-                    y[j] = 0.0;
-                }
-            }
-
-            return y;
-        };
+    /**
+     * Unitizes each column of a matrix to unit length (L_2 norm).
+     */
+    public static void normalize(double[][] x) {
+        normalize(x, false);
     }
 
     /**
      * Unitizes each column of a matrix to unit length (L_2 norm).
      * @param centerizing If true, centerize each column to 0 mean.
      */
-    public static java.util.function.Function<double[], double[]> normalize(double[][] x, boolean centerizing) {
+    public static void normalize(double[][] x, boolean centerizing) {
         int n = x.length;
         int p = x[0].length;
 
-        double[] center = colMeans(x);
         if (centerizing) {
+            double[] center = colMeans(x);
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < p; j++) {
                     x[i][j] = x[i][j] - center[j];
@@ -3109,24 +3205,6 @@ public class Math {
                 }
             }
         }
-
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                if (centerizing) y[j] = xi[j] - center[j];
-
-                if (!Math.isZero(scale[j])) {
-                    y[j] /= scale[j];
-                } else {
-                    y[j] = 0.0;
-                }
-            }
-
-            return y;
-        };
     }
 
     /**

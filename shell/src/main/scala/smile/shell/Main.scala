@@ -17,6 +17,8 @@
 package smile.shell
 
 import scala.tools.nsc._, GenericRunnerCommand._, io.File
+import ammonite.main.Cli
+import ammonite.ops.{Path, pwd}
 
 /** An object that runs Smile script or interactive shell.
   * Based on Scala MainGenericRunner.
@@ -25,8 +27,39 @@ import scala.tools.nsc._, GenericRunnerCommand._, io.File
   */
 object Main extends App {
 
-  // This is actually the main function
-  if (!process(args)) sys.exit(1)
+  // Ammonite REPL doesn't support Windows
+  if (System.getProperty("os.name").startsWith("Windows")) {
+    if (!process(args)) sys.exit(1)
+  } else {
+    Cli.groupArgs(args.toList, Cli.ammoniteArgSignature, Cli.Config()) match {
+      case Left(msg) =>
+        println(msg)
+        false
+      case Right((cliConfig, leftoverArgs)) =>
+        if (cliConfig.help) {
+          println(Cli.ammoniteHelp)
+          true
+        } else {
+          (cliConfig.code, leftoverArgs) match {
+            case (Some(code), Nil) =>
+              AmmoniteREPL.runCode(code)
+
+            case (None, Nil) =>
+              AmmoniteREPL.run()
+              true
+
+            case (None, head :: rest) if head.startsWith("-") =>
+              val failureMsg = s"Unknown option: $head\nUse --help to list possible options"
+              println(failureMsg)
+              false
+
+            case (None, head :: rest) =>
+              val success = AmmoniteREPL.runScript(Path(head, pwd)) // ignore script args for now
+              success
+          }
+        }
+    }
+  }
 
   def errorFn(str: String, e: Option[Throwable] = None, isFailure: Boolean = true): Boolean = {
     if (str.nonEmpty) Console.err println str
@@ -67,7 +100,7 @@ object Main extends App {
         case Error =>
           Right(false)
         case _  =>
-          Right(new Shell process settings)
+          Right(new ScalaREPL process settings)
       }
 
       /** If -e and -i were both given, we want to execute the -e code after the

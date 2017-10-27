@@ -55,12 +55,12 @@ public class ConfusionMatrix {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("ROW=truth and COL=predicted\n\n");
+		sb.append("ROW=truth and COL=predicted\n");
 		
 		for(int i = 0; i < matrix.length; i++){
-			sb.append("class "+i+"\t: ");
+			sb.append(String.format("class %2d |", i));
 			for(int j = 0; j < matrix.length; j++){
-				sb.append(matrix[i][j] +"\t| ");
+				sb.append(String.format("%8d |", matrix[i][j]));
 			}
 			sb.append("\n");
  		}

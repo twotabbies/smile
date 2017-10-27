@@ -43,6 +43,151 @@ object write {
       close
     }
   }
+
+  /** Writes an AttributeDataset to an ARFF file. */
+  def arff(data: AttributeDataset, file: String): Unit = {
+    val writer = new PrintWriter(new File(file))
+
+    writer.print("@RELATION ")
+    writer.println(data.getName)
+
+    val attributes = data.attributes()
+    attributes.foreach { attr =>
+      writeAttribute(writer, attr)
+    }
+
+    val response = data.responseAttribute
+    if (response != null) {
+      writeAttribute(writer, response)
+    }
+
+    writer.println("@DATA")
+
+    val p = attributes.length
+    data.foreach { row =>
+      val x = (0 until p).map { i =>
+        attributes(i).toString(row.x(i))
+      }.mkString(",")
+      writer.print(x)
+
+      if (response != null) {
+        writer.print(',')
+        writer.print(response.toString(row.y))
+      }
+
+      writer.println
+    }
+
+    writer.close
+  }
+
+  private def writeAttribute(writer: PrintWriter, attr: Attribute): Unit = {
+    writer.print("@ATTRIBUTE ")
+    writer.print(attr.getName)
+    attr.getType match {
+      case Attribute.Type.NUMERIC => writer.println(" REAL")
+      case Attribute.Type.STRING => writer.println(" STRING")
+      case Attribute.Type.DATE => writer.println(""" DATE "yyyy-MM-dd HH:mm:ss"""")
+      case Attribute.Type.NOMINAL =>
+        val nominal = attr.asInstanceOf[NominalAttribute]
+        writer.println((0 until nominal.size).map(nominal.toString(_)).mkString(" {", ",", "}"))
+    }
+  }
+
+  /** Writes an AttributeDataset to a delimited text file.
+    *
+    * @param data an attribute dataset.
+    * @param file the file path
+    * @param delimiter delimiter string
+    */
+  def table(data: AttributeDataset, file: String, delimiter: String = "\t"): Unit = {
+    val writer = new PrintWriter(new File(file))
+
+    val attributes = data.attributes()
+    writer.print(attributes.map(_.getName).mkString(delimiter))
+
+    val response = data.responseAttribute
+    if (response != null) {
+      writer.print(delimiter)
+      writer.print(response.getName)
+    }
+
+    writer.println
+
+    val p = attributes.length
+    data.foreach { row =>
+      val x = (0 until p).map { i =>
+        attributes(i).toString(row.x(i))
+      }.mkString(delimiter)
+      writer.print(x)
+
+      if (response != null) {
+        writer.print(delimiter)
+        writer.print(response.toString(row.y))
+      }
+
+      writer.println
+    }
+
+    writer.close
+  }
+
+  /** Writes an AttributeDataset to a delimited text file.
+    *
+    * @param data an attribute dataset.
+    * @param file the file path
+    */
+  def csv(data: AttributeDataset, file: String): Unit = {
+    table(data, file, ",")
+  }
+
+  /** Writes a two-dimensional array to a delimited text file.
+    *
+    * @param data a two-dimensional array.
+    * @param file the file path
+    * @param delimiter delimiter string
+    */
+  def table[T](data: Array[Array[T]], file: String, delimiter: String): Unit = {
+    val writer = new PrintWriter(new File(file))
+
+    data.foreach { row =>
+      writer.println(row.mkString(delimiter))
+    }
+
+    writer.close
+  }
+
+  /** Writes a two-dimensional array to a delimited text file.
+    *
+    * @param data a two-dimensional array.
+    * @param file the file path
+    */
+  def csv[T](data: Array[Array[T]], file: String): Unit = {
+    table(data, file, ",")
+  }
+
+  /** Writes an AttributeVector to a text file line by line.
+    *
+    * @param data an array.
+    * @param file the file path
+    */
+  def apply[T](data: AttributeVector, file: String): Unit = {
+    val writer = new PrintWriter(new File(file))
+    writer.println(data.attribute.getName)
+    data.vector.foreach(writer.println(_))
+    writer.close
+  }
+
+  /** Writes an array to a text file line by line.
+    *
+    * @param data an array.
+    * @param file the file path
+    */
+  def apply[T](data: Array[T], file: String): Unit = {
+    val writer = new PrintWriter(new File(file))
+    data.foreach(writer.println(_))
+    writer.close
+  }
 }
 
 /** Input operators. */
@@ -179,7 +324,7 @@ object read {
     * @param rowNames true if the first column is row id/names
     * @return an attribute dataset
     */
-  def table(file: String, response: Option[(Attribute, Int)] = None, delimiter: String = "\\s+", comment: String = "%", missing: String = "?", header: Boolean = false, rowNames: Boolean = false): AttributeDataset = {
+  def table(file: String, attributes: Array[Attribute] = null, response: Option[(Attribute, Int)] = None, delimiter: String = "\\s+", comment: String = "%", missing: String = "?", header: Boolean = false, rowNames: Boolean = false): AttributeDataset = {
     val parser = new DelimitedTextParser
 
     response match {
@@ -192,12 +337,12 @@ object read {
       .setMissingValuePlaceholder(missing)
       .setColumnNames(header)
       .setRowNames(rowNames)
-      .parse(file)
+      .parse(attributes, file)
   }
 
   /** Reads a CSV file  with response variable. */
-  def csv(file: String, response: Option[(Attribute, Int)] = None, comment: String = "%", missing: String = "?", header: Boolean = false, rowNames: Boolean = false): AttributeDataset = {
-    table(file, response, ",", comment, missing, header, rowNames)
+  def csv(file: String, attributes: Array[Attribute] = null, response: Option[(Attribute, Int)] = None, comment: String = "%", missing: String = "?", header: Boolean = false, rowNames: Boolean = false): AttributeDataset = {
+    table(file, attributes, response, ",", comment, missing, header, rowNames)
   }
 
   /** Reads GCT microarray gene expression file. */
