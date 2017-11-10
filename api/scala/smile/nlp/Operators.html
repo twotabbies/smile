@@ -353,8 +353,8 @@ corpora. They may also be used to find other associations between word
 occurrences.</p><p>Finding collocations requires first calculating the frequencies of words
 and their appearance in the context of other words. Often the collection
 of words will then requiring filtering to only retain useful content terms.
-Each ngram of words may then be scored according to some association measure,
-in order to determine the relative likelihood of each ngram being a
+Each n-gram of words may then be scored according to some association measure,
+in order to determine the relative likelihood of each n-gram being a
 collocation.
 </p></div><dl class="paramcmts block"><dt class="param">k</dt><dd class="cmt"><p>finds top k bigram.</p></dd><dt class="param">minFreq</dt><dd class="cmt"><p>the minimum frequency of collocation.</p></dd><dt class="param">text</dt><dd class="cmt"><p>input text.</p></dd><dt>returns</dt><dd class="cmt"><p>significant bigram collocations in descending order
         of likelihood ratio.</p></dd></dl></div>
@@ -397,6 +397,23 @@ collocation.
       
       <p class="shortcomment cmt">Creates an in-memory text corpus.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an in-memory text corpus.
 </p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>a set of text.</p></dd></dl></div>
+    </li><li name="smile.nlp.Operators#df" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="df(terms:Array[String],corpus:Array[Map[String,Int]]):Array[Int]"></a><a id="df(Array[String],Array[Map[String,Int]]):Array[Int]"></a>
+      <span class="permalink">
+      <a href="../../smile/nlp/Operators.html#df(terms:Array[String],corpus:Array[Map[String,Int]]):Array[Int]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">df</span><span class="params">(<span name="terms">terms: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="corpus">corpus: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns the document frequencies, i.e.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the document frequencies, i.e. the number of documents that contain term.
+</p></div><dl class="paramcmts block"><dt class="param">terms</dt><dd class="cmt"><p>the token list used as features.</p></dd><dt class="param">corpus</dt><dd class="cmt"><p>the training corpus.</p></dd><dt>returns</dt><dd class="cmt"><p>the array of document frequencies.</p></dd></dl></div>
     </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a><a id="ensuring((Operators)⇒Boolean,⇒Any):Operators"></a>
       <span class="permalink">
@@ -668,9 +685,9 @@ collocation.
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="smile.nlp.Operators#postag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="postag(sentence:String):Array[smile.nlp.pos.PennTreebankPOS]"></a><a id="postag(String):Array[PennTreebankPOS]"></a>
+      <a id="postag(sentence:Array[String]):Array[smile.nlp.pos.PennTreebankPOS]"></a><a id="postag(Array[String]):Array[PennTreebankPOS]"></a>
       <span class="permalink">
-      <a href="../../smile/nlp/Operators.html#postag(sentence:String):Array[smile.nlp.pos.PennTreebankPOS]" title="Permalink">
+      <a href="../../smile/nlp/Operators.html#postag(sentence:Array[String]):Array[smile.nlp.pos.PennTreebankPOS]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -679,11 +696,11 @@ collocation.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">postag</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="smile.nlp.pos.PennTreebankPOS">PennTreebankPOS</span>]</span>
+        <span class="name">postag</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="smile.nlp.pos.PennTreebankPOS">PennTreebankPOS</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Part-of-speech taggers.</p><div class="fullcomment"><div class="comment cmt"><p>Part-of-speech taggers.
-</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>a sentence.</p></dd><dt>returns</dt><dd class="cmt"><p>the pos tags.</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>a sentence that is already segmented to words.</p></dd><dt>returns</dt><dd class="cmt"><p>the pos tags.</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
@@ -700,6 +717,44 @@ collocation.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="smile.nlp.Operators#tfidf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tfidf(bag:Array[Double],n:Int,df:Array[Int]):Array[Double]"></a><a id="tfidf(Array[Double],Int,Array[Int]):Array[Double]"></a>
+      <span class="permalink">
+      <a href="../../smile/nlp/Operators.html#tfidf(bag:Array[Double],n:Int,df:Array[Int]):Array[Double]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tfidf</span><span class="params">(<span name="bag">bag: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>, <span name="n">n: <span class="extype" name="scala.Int">Int</span></span>, <span name="df">df: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Converts a bag of words to a feature vector by TF-IDF, which
+is normalized to L2 norm 1.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a bag of words to a feature vector by TF-IDF, which
+is normalized to L2 norm 1.
+</p></div><dl class="paramcmts block"><dt class="param">bag</dt><dd class="cmt"><p>the bag-of-words feature vector of a document.</p></dd><dt class="param">n</dt><dd class="cmt"><p>the number of documents in training corpus.</p></dd><dt class="param">df</dt><dd class="cmt"><p>the number of documents containing the given term in the corpus.</p></dd><dt>returns</dt><dd class="cmt"><p>TF-IDF feature vector</p></dd></dl></div>
+    </li><li name="smile.nlp.Operators#tfidf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tfidf(corpus:Array[Array[Double]]):Array[Array[Double]]"></a><a id="tfidf(Array[Array[Double]]):Array[Array[Double]]"></a>
+      <span class="permalink">
+      <a href="../../smile/nlp/Operators.html#tfidf(corpus:Array[Array[Double]]):Array[Array[Double]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tfidf</span><span class="params">(<span name="corpus">corpus: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Converts a corpus to TF-IDF feature vectors, which
+are normalized to L2 norm 1.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a corpus to TF-IDF feature vectors, which
+are normalized to L2 norm 1.
+</p></div><dl class="paramcmts block"><dt class="param">corpus</dt><dd class="cmt"><p>the corpus of documents in bag-of-words representation.</p></dd><dt>returns</dt><dd class="cmt"><p>a matrix of which each row is the TF-IDF feature vector.</p></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">
@@ -716,6 +771,41 @@ collocation.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="smile.nlp.Operators#vectorize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="vectorize(terms:Array[String],bag:Set[String]):Array[Int]"></a><a id="vectorize(Array[String],Set[String]):Array[Int]"></a>
+      <span class="permalink">
+      <a href="../../smile/nlp/Operators.html#vectorize(terms:Array[String],bag:Set[String]):Array[Int]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">vectorize</span><span class="params">(<span name="terms">terms: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="bag">bag: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Converts a binary bag of words to a sparse feature vector.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a binary bag of words to a sparse feature vector.
+</p></div><dl class="paramcmts block"><dt class="param">terms</dt><dd class="cmt"><p>the token list used as features.</p></dd><dt class="param">bag</dt><dd class="cmt"><p>the bag of words.</p></dd><dt>returns</dt><dd class="cmt"><p>an integer vector, which elements are the indices of presented
+        feature tokens in ascending order.</p></dd></dl></div>
+    </li><li name="smile.nlp.Operators#vectorize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="vectorize(terms:Array[String],bag:Map[String,Int]):Array[Double]"></a><a id="vectorize(Array[String],Map[String,Int]):Array[Double]"></a>
+      <span class="permalink">
+      <a href="../../smile/nlp/Operators.html#vectorize(terms:Array[String],bag:Map[String,Int]):Array[Double]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">vectorize</span><span class="params">(<span name="terms">terms: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="bag">bag: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Converts a bag of words to a feature vector.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a bag of words to a feature vector.
+</p></div><dl class="paramcmts block"><dt class="param">terms</dt><dd class="cmt"><p>the token list used as features.</p></dd><dt class="param">bag</dt><dd class="cmt"><p>the bag of words.</p></dd><dt>returns</dt><dd class="cmt"><p>a vector of frequency of feature tokens in the bag.</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">

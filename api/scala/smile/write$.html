@@ -302,6 +302,25 @@ a data matrix, the rows and columns are clustered simultaneously. They
 usually do not however work with arbitrary feature combinations as in general
 subspace methods.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="smile">smile</a></dd></dl></div>
+    </li><li name="smile.data" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="data"></a><a id="data:data"></a>
+      <span class="permalink">
+      <a href="../smile/index.html#data" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="Data manipulation functions." href="data/index.html">
+              <span class="name">data</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Data manipulation functions.</p><div class="fullcomment"><div class="comment cmt"><p>Data manipulation functions.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="smile">smile</a></dd></dl></div>
     </li><li name="smile.feature" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="feature"></a><a id="feature:feature"></a>
       <span class="permalink">
@@ -918,6 +937,40 @@ can be viewed as a rotation in function space.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="smile.write#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply[T](data:Array[T],file:String):Unit"></a><a id="apply[T](Array[T],String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#apply[T](data:Array[T],file:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="smile.write.apply.T">T</span>]</span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes an array to a text file line by line.</p><div class="fullcomment"><div class="comment cmt"><p>Writes an array to a text file line by line.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>an array.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd></dl></div>
+    </li><li name="smile.write#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply[T](data:smile.data.AttributeVector,file:String):Unit"></a><a id="apply[T](AttributeVector,String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#apply[T](data:smile.data.AttributeVector,file:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span class="extype" name="smile.data.AttributeVector">AttributeVector</span></span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes an AttributeVector to a text file line by line.</p><div class="fullcomment"><div class="comment cmt"><p>Writes an AttributeVector to a text file line by line.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>an array.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd></dl></div>
     </li><li name="smile.write#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="apply[T&lt;:java.io.Serializable](x:T,file:String):Unit"></a><a id="apply[T&lt;:Serializable](T,String):Unit"></a>
       <span class="permalink">
@@ -934,6 +987,22 @@ can be viewed as a rotation in function space.
       </span>
       
       <p class="shortcomment cmt">Serializes a <code>Serializable</code> object/model to a file.</p>
+    </li><li name="smile.write#arff" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="arff(data:smile.data.AttributeDataset,file:String):Unit"></a><a id="arff(AttributeDataset,String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#arff(data:smile.data.AttributeDataset,file:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">arff</span><span class="params">(<span name="data">data: <span class="extype" name="smile.data.AttributeDataset">AttributeDataset</span></span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes an AttributeDataset to an ARFF file.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
@@ -972,6 +1041,40 @@ can be viewed as a rotation in function space.
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="smile.write#csv" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="csv[T](data:Array[Array[T]],file:String):Unit"></a><a id="csv[T](Array[Array[T]],String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#csv[T](data:Array[Array[T]],file:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">csv</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="smile.write.csv.T">T</span>]]</span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes a two-dimensional array to a delimited text file.</p><div class="fullcomment"><div class="comment cmt"><p>Writes a two-dimensional array to a delimited text file.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>a two-dimensional array.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd></dl></div>
+    </li><li name="smile.write#csv" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="csv(data:smile.data.AttributeDataset,file:String):Unit"></a><a id="csv(AttributeDataset,String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#csv(data:smile.data.AttributeDataset,file:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">csv</span><span class="params">(<span name="data">data: <span class="extype" name="smile.data.AttributeDataset">AttributeDataset</span></span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes an AttributeDataset to a delimited text file.</p><div class="fullcomment"><div class="comment cmt"><p>Writes an AttributeDataset to a delimited text file.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>an attribute dataset.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
@@ -1138,6 +1241,40 @@ can be viewed as a rotation in function space.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="smile.write#table" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="table[T](data:Array[Array[T]],file:String,delimiter:String):Unit"></a><a id="table[T](Array[Array[T]],String,String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#table[T](data:Array[Array[T]],file:String,delimiter:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">table</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="smile.write.table.T">T</span>]]</span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="delimiter">delimiter: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes a two-dimensional array to a delimited text file.</p><div class="fullcomment"><div class="comment cmt"><p>Writes a two-dimensional array to a delimited text file.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>a two-dimensional array.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd><dt class="param">delimiter</dt><dd class="cmt"><p>delimiter string</p></dd></dl></div>
+    </li><li name="smile.write#table" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="table(data:smile.data.AttributeDataset,file:String,delimiter:String):Unit"></a><a id="table(AttributeDataset,String,String):Unit"></a>
+      <span class="permalink">
+      <a href="../smile/write$.html#table(data:smile.data.AttributeDataset,file:String,delimiter:String):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">table</span><span class="params">(<span name="data">data: <span class="extype" name="smile.data.AttributeDataset">AttributeDataset</span></span>, <span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="delimiter">delimiter: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;\t&quot;</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Writes an AttributeDataset to a delimited text file.</p><div class="fullcomment"><div class="comment cmt"><p>Writes an AttributeDataset to a delimited text file.
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>an attribute dataset.</p></dd><dt class="param">file</dt><dd class="cmt"><p>the file path</p></dd><dt class="param">delimiter</dt><dd class="cmt"><p>delimiter string</p></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">

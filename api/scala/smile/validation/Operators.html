@@ -110,6 +110,12 @@
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="smile">smile</a></dd></dl></div>
     </li><li class="current-entities indented2">
                         <span class="separator"></span>
+                        <a class="class" href="MutualInformationScore.html" title="Mutual Information score between two clusterings with optional normalization."></a>
+                        <a href="MutualInformationScore.html" title="Mutual Information score between two clusterings with optional normalization.">
+                          MutualInformationScore
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
                         <a class="trait" href="" title="Model validation."></a>
                         <a href="" title="Model validation.">
                           Operators
@@ -296,6 +302,45 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="smile.validation.Operators#accuracy" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="accuracy(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="accuracy(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#accuracy(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">accuracy</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The accuracy is the proportion of true results (both true positives and
+true negatives) in the population.</p>
+    </li><li name="smile.validation.Operators#adjustedRandIndex" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="adjustedRandIndex(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="adjustedRandIndex(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#adjustedRandIndex(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">adjustedRandIndex</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Adjusted Rand Index.</p><div class="fullcomment"><div class="comment cmt"><p>Adjusted Rand Index. Adjusted Rand Index assumes the generalized
+hyper-geometric distribution as the model of randomness. The adjusted Rand
+index has the maximum value 1, and its expected value is 0 in the case
+of random clusters. A larger adjusted Rand index means a higher agreement
+between two partitions. The adjusted Rand index is recommended for measuring
+agreement even when the partitions compared have different numbers of clusters.
+</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
@@ -312,6 +357,26 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="smile.validation.Operators#auc" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="auc(truth:Array[Int],probability:Array[Double]):Double"></a><a id="auc(Array[Int],Array[Double]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#auc(truth:Array[Int],probability:Array[Double]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">auc</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="probability">probability: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The area under the curve (AUC).</p><div class="fullcomment"><div class="comment cmt"><p>The area under the curve (AUC). When using normalized units, the area under
+the curve is equal to the probability that a classifier will rank a
+randomly chosen positive instance higher than a randomly chosen negative
+one (assuming 'positive' ranks higher than 'negative').
+</p></div></div>
     </li><li name="smile.validation.Operators#bootstrap" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="bootstrap[T&lt;:Object](x:Array[T],y:Array[Double],k:Int,measures:smile.validation.RegressionMeasure*)(trainer:=&gt;(Array[T],Array[Double])=&gt;smile.regression.Regression[T]):Array[Double]"></a><a id="bootstrap[T&lt;:AnyRef](Array[T],Array[Double],Int,RegressionMeasure*)(⇒(Array[T],Array[Double])⇒Regression[T]):Array[Double]"></a>
       <span class="permalink">
@@ -374,6 +439,22 @@ the k replications.
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="smile.validation.Operators#confusion" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="confusion(truth:Array[Int],prediction:Array[Int]):smile.validation.ConfusionMatrix"></a><a id="confusion(Array[Int],Array[Int]):ConfusionMatrix"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#confusion(truth:Array[Int],prediction:Array[Int]):smile.validation.ConfusionMatrix" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">confusion</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="smile.validation.ConfusionMatrix">ConfusionMatrix</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Computes the confusion matrix.</p>
     </li><li name="smile.validation.Operators#cv" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cv[T&lt;:Object](x:Array[T],y:Array[Double],k:Int,measures:smile.validation.RegressionMeasure*)(trainer:=&gt;(Array[T],Array[Double])=&gt;smile.regression.Regression[T]):Array[Double]"></a><a id="cv[T&lt;:AnyRef](Array[T],Array[Double],Int,RegressionMeasure*)(⇒(Array[T],Array[Double])⇒Regression[T]):Array[Double]"></a>
       <span class="permalink">
@@ -530,6 +611,65 @@ validation results are averaged over the rounds.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="smile.validation.Operators#f1" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="f1(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="f1(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#f1(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">f1</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The F-score (or F-measure) considers both the precision and the recall of the test
+to compute the score.</p><div class="fullcomment"><div class="comment cmt"><p>The F-score (or F-measure) considers both the precision and the recall of the test
+to compute the score. The precision p is the number of correct positive results
+divided by the number of all positive results, and the recall r is the number of
+correct positive results divided by the number of positive results that should
+have been returned.</p><p>The traditional or balanced F-score (F1 score) is the harmonic mean of
+precision and recall, where an F1 score reaches its best value at 1 and worst at 0.
+</p></div></div>
+    </li><li name="smile.validation.Operators#fallout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fallout(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="fallout(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#fallout(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fallout</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Fall-out, false alarm rate, or false positive rate (FPR).</p><div class="fullcomment"><div class="comment cmt"><p>Fall-out, false alarm rate, or false positive rate (FPR).
+Fall-out is actually Type I error and closely related to specificity
+(1 - specificity).
+</p></div></div>
+    </li><li name="smile.validation.Operators#fdr" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fdr(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="fdr(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#fdr(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fdr</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The false discovery rate (FDR) is ratio of false positives
+to combined true and false positives, which is actually 1 - precision.</p>
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
@@ -664,6 +804,54 @@ observations in the original sample. Leave-one-out cross-validation is
 usually very expensive from a computational point of view because of the
 large number of times the training process is repeated.
 </p></div><dl class="paramcmts block"><dt class="param">x</dt><dd class="cmt"><p>data samples.</p></dd><dt class="param">y</dt><dd class="cmt"><p>sample labels.</p></dd><dt class="param">measures</dt><dd class="cmt"><p>validation measures such as accuracy, specificity, etc.</p></dd><dt class="param">trainer</dt><dd class="cmt"><p>a code block to return a classifier trained on the given data.</p></dd><dt>returns</dt><dd class="cmt"><p>measure results.</p></dd></dl></div>
+    </li><li name="smile.validation.Operators#mad" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="mad(truth:Array[Double],prediction:Array[Double]):Double"></a><a id="mad(Array[Double],Array[Double]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#mad(truth:Array[Double],prediction:Array[Double]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mad</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Mean absolute deviation error.</p>
+    </li><li name="smile.validation.Operators#mse" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="mse(truth:Array[Double],prediction:Array[Double]):Double"></a><a id="mse(Array[Double],Array[Double]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#mse(truth:Array[Double],prediction:Array[Double]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mse</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Mean squared error.</p>
+    </li><li name="smile.validation.Operators#mutualInformationScore" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="mutualInformationScore(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="mutualInformationScore(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#mutualInformationScore(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mutualInformationScore</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Normalized mutual information score between two clusterings.</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
@@ -712,6 +900,137 @@ large number of times the training process is repeated.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="smile.validation.Operators#precision" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="precision(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="precision(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#precision(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">precision</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The precision or positive predictive value (PPV) is ratio of true positives
+to combined true and false positives, which is different from sensitivity.</p>
+    </li><li name="smile.validation.Operators#randIndex" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="randIndex(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="randIndex(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#randIndex(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">randIndex</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Rand index is defined as the number of pairs of objects
+that are either in the same group or in different groups in both partitions
+divided by the total number of pairs of objects.</p><div class="fullcomment"><div class="comment cmt"><p>Rand index is defined as the number of pairs of objects
+that are either in the same group or in different groups in both partitions
+divided by the total number of pairs of objects. The Rand index lies between
+0 and 1. When two partitions agree perfectly, the Rand index achieves the
+maximum value 1. A problem with Rand index is that the expected value of
+the Rand index between two random partitions is not a constant. This problem
+is corrected by the adjusted Rand index.
+</p></div></div>
+    </li><li name="smile.validation.Operators#recall" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="recall(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="recall(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#recall(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">recall</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">In information retrieval area, sensitivity is called recall.</p>
+    </li><li name="smile.validation.Operators#rmse" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rmse(truth:Array[Double],prediction:Array[Double]):Double"></a><a id="rmse(Array[Double],Array[Double]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#rmse(truth:Array[Double],prediction:Array[Double]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rmse</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Root mean squared error.</p>
+    </li><li name="smile.validation.Operators#rss" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rss(truth:Array[Double],prediction:Array[Double]):Double"></a><a id="rss(Array[Double],Array[Double]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#rss(truth:Array[Double],prediction:Array[Double]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rss</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Double">Double</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Residual sum of squares.</p>
+    </li><li name="smile.validation.Operators#sensitivity" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sensitivity(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="sensitivity(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#sensitivity(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sensitivity</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Sensitivity or true positive rate (TPR) (also called hit rate, recall) is a
+statistical measures of the performance of a binary classification test.</p><div class="fullcomment"><div class="comment cmt"><p>Sensitivity or true positive rate (TPR) (also called hit rate, recall) is a
+statistical measures of the performance of a binary classification test.
+Sensitivity is the proportion of actual positives which are correctly
+identified as such.
+</p></div></div>
+    </li><li name="smile.validation.Operators#specificity" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="specificity(truth:Array[Int],prediction:Array[Int]):Double"></a><a id="specificity(Array[Int],Array[Int]):Double"></a>
+      <span class="permalink">
+      <a href="../../smile/validation/Operators.html#specificity(truth:Array[Int],prediction:Array[Int]):Double" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">specificity</span><span class="params">(<span name="truth">truth: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="prediction">prediction: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Specificity or True Negative Rate is a statistical measures of the
+performance of a binary classification test.</p><div class="fullcomment"><div class="comment cmt"><p>Specificity or True Negative Rate is a statistical measures of the
+performance of a binary classification test. Specificity measures the
+proportion of negatives which are correctly identified.
+</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
