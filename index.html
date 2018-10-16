@@ -71,7 +71,7 @@
       }
 
       var page = getPageName();
-      if (typeof(page) != 'undefined' && page != null && page != "template.html" && page != "jupyter.html") {
+      if (typeof(page) != 'undefined' && page != null && page != "template.html") {
         if (page == "") page = "index-content.html";
         else page = page.replace('.html', '-content.html');
         ajaxLoad(page);
@@ -166,7 +166,6 @@
 </header>
 
 <div id="content" class="row">
-    <iframe src="jupyter-notebook.html"></iframe>
 </div>
 </div>
 
