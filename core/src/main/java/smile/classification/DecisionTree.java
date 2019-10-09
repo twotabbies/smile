@@ -144,12 +144,15 @@ public class DecisionTree implements SoftClassifier<double[]> {
      * attributes will have a null in the corresponding place in the array.
      */
     private transient int[][] order;
-
     /**
      * An index of training values that maps their current position in the {@link #order} arrays to
      * their original locations.
      */
     private transient int[] originalOrder;
+    /**
+     * A map from original class labels to the internal dense labels.
+     */
+    private SparseClassMap labelMap;
 
     /**
      * Trainer for decision tree classifiers.
@@ -275,7 +278,8 @@ public class DecisionTree implements SoftClassifier<double[]> {
     class Node implements Serializable {
 
         /**
-         * Predicted class label for this node.
+         * Predicted class label for this node. This is the "sparse" version of this label,
+         * as provided in the original training data.
          */
         int output = -1;
         /**
@@ -385,8 +389,22 @@ public class DecisionTree implements SoftClassifier<double[]> {
          * Fills an array with this node's posterior probabilities.
          */
         void setPosteriori(double[] posteriori) {
+            if (posteriori.length < labelMap.maxSparseLabel() + 1) {
+                throw new IllegalArgumentException(String.format("Invalid posteriori vector size: %d, expected at least: %d", posteriori.length, labelMap.maxSparseLabel() + 1));
+            } else if (posteriori.length != k) {
+                Arrays.fill(posteriori, 0.0);
+            }
+
             int totalCount = Math.sum(count);
-            computePosteriori(count, totalCount, posteriori);
+            if (labelMap.isIdentity()) {
+                computePosteriori(count, totalCount, posteriori);
+            } else {
+                double[] densePosteriori = new double[k];
+                computePosteriori(count, totalCount, densePosteriori);
+                for (int i = 0; i < k; i++) {
+                    posteriori[labelMap.denseLabelToSparseLabel(i)] = densePosteriori[i];
+                }
+            }
         }
 
         boolean isLeaf() {
@@ -695,8 +713,8 @@ public class DecisionTree implements SoftClassifier<double[]> {
                 return false;
             }
 
-            int trueChildOutput = Math.whichMax(trueChildCount);
-            int falseChildOutput = Math.whichMax(falseChildCount);
+            int trueChildOutput = labelMap.denseLabelToSparseLabel(Math.whichMax(trueChildCount));
+            int falseChildOutput = labelMap.denseLabelToSparseLabel(Math.whichMax(falseChildCount));
 
             node.trueChild = new Node(trueChildOutput, trueChildCount);
             node.falseChild = new Node(falseChildOutput, falseChildCount);
@@ -886,6 +904,30 @@ public class DecisionTree implements SoftClassifier<double[]> {
      * samples[i] is the number of sampling for instance i.
      */
     public DecisionTree(Attribute[] attributes, double[][] x, int[] y, int maxNodes, int nodeSize, int mtry, SplitRule rule, int[] samples, int[][] order) {
+        this(attributes, x, y, maxNodes, nodeSize, mtry, rule, samples, order, null);
+    }
+
+    /**
+     * Constructor. Learns a classification tree for AdaBoost and Random Forest.
+     * @param attributes the attribute properties.
+     * @param x the training instances.
+     * @param y the response variable.
+     * @param nodeSize the minimum size of leaf nodes.
+     * @param maxNodes the maximum number of leaf nodes in the tree.
+     * @param mtry the number of input variables to pick to split on at each
+     * node. It seems that sqrt(p) give generally good performance, where p
+     * is the number of variables.
+     * @param rule the splitting rule.
+     * @param order the index of training values in ascending order. Note
+     * that only numeric attributes need be sorted.
+     * @param samples the sample set of instances for stochastic learning.
+     * samples[i] is the number of sampling for instance i.
+     * @param order an ordering of the values in x
+     * @param labelMap if non-null, the values in y are assumed to have been converted from sparse
+     * to dense using this map, and values returned by predict() should be reverse-mapped
+     * through it.
+     */
+    DecisionTree(Attribute[] attributes, double[][] x, int[] y, int maxNodes, int nodeSize, int mtry, SplitRule rule, int[] samples, int[][] order, SparseClassMap labelMap) {
         if (x.length != y.length) {
             throw new IllegalArgumentException(String.format("The sizes of X and Y don't match: %d != %d", x.length, y.length));
         }
@@ -903,24 +945,16 @@ public class DecisionTree implements SoftClassifier<double[]> {
         }
 
         // class label set.
-        int[] labels = Math.unique(y);
-        Arrays.sort(labels);
-        
-        for (int i = 0; i < labels.length; i++) {
-            if (labels[i] < 0) {
-                throw new IllegalArgumentException("Negative class label: " + labels[i]);
-            }
-
-            if (labels[i] != i) {
-                throw new IllegalArgumentException("Missing class: " + i);
-            }
+        if (labelMap == null) {
+            labelMap = new SparseClassMap(y);
+            y = labelMap.sparseLabelsToDenseLabels(y);
         }
-
-        k = labels.length;
+        this.labelMap = labelMap;
+        k = labelMap.numberOfClasses();
         if (k < 2) {
-            throw new IllegalArgumentException("Only one class.");            
+            throw new IllegalArgumentException("Only one class.");
         }
-        
+
         if (attributes == null) {
             int p = x[0].length;
             attributes = new Attribute[p];
@@ -975,7 +1009,7 @@ public class DecisionTree implements SoftClassifier<double[]> {
             makeCompressedOrder(samples, order != null, allPresent);
         }
 
-        root = new Node(Math.whichMax(count), count);
+        root = new Node(labelMap.denseLabelToSparseLabel(Math.whichMax(count)), count);
 
         TrainNode trainRoot = new TrainNode(root, x, y, samples, 0, originalOrder.length);
         if(maxNodes == Integer.MAX_VALUE) {// depth-first split
@@ -1334,6 +1368,14 @@ public class DecisionTree implements SoftClassifier<double[]> {
         line.append(node.output).append(" (");
         double[] posteriori = new double[k];
         computePosteriori(count, totalCount, posteriori);
+        if (!labelMap.isIdentity()) {
+            double[] sparsePosteriori = new double[labelMap.maxSparseLabel() + 1];
+            for (int i = 0; i < k; i++) {
+                sparsePosteriori[labelMap.denseLabelToSparseLabel(i)] = posteriori[i];
+            }
+            posteriori = sparsePosteriori;
+        }
+
         for (int i = 0; i < posteriori.length; i++) {
             if (i != 0) {
                     line.append(" ");

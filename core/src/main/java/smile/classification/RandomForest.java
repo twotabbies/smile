@@ -113,6 +113,10 @@ public class RandomForest implements SoftClassifier<double[]> {
      * importance measure.
      */
     private double[] importance;
+    /**
+     * A map from original class labels to the internal dense labels.
+     */
+    private final SparseClassMap labelMap;
 
     /**
      * Trainer for random forest classifiers.
@@ -323,11 +327,15 @@ public class RandomForest implements SoftClassifier<double[]> {
          * deterministic, even when multi-threading.
          */
         int rngSeed;
+        /*
+         * A map from original class labels to the internal dense labels.
+         */
+        SparseClassMap labelMap;
 
         /**
          * Constructor.
          */
-        TrainingTask(Attribute[] attributes, double[][] x, int[] y, int maxNodes, int nodeSize, int mtry, double subsample, DecisionTree.SplitRule rule, int[] classWeight, int[][] order, int[][] prediction) {
+        TrainingTask(Attribute[] attributes, double[][] x, int[] y, int maxNodes, int nodeSize, int mtry, double subsample, DecisionTree.SplitRule rule, int[] classWeight, int[][] order, int[][] prediction, SparseClassMap labelMap) {
             this.attributes = attributes;
             this.x = x;
             this.y = y;
@@ -340,6 +348,7 @@ public class RandomForest implements SoftClassifier<double[]> {
             this.order = order;
             this.prediction = prediction;
             this.rngSeed = Math.randomInt(Integer.MAX_VALUE);
+            this.labelMap = labelMap;
         }
 
         @Override
@@ -398,7 +407,7 @@ public class RandomForest implements SoftClassifier<double[]> {
                 }
             }
 
-            DecisionTree tree = new DecisionTree(attributes, x, y, maxNodes, nodeSize, mtry, rule, samples, order);
+            DecisionTree tree = new DecisionTree(attributes, x, y, maxNodes, nodeSize, mtry, rule, samples, order, labelMap);
 
             // estimate OOB error
             int oob = 0;
@@ -406,7 +415,7 @@ public class RandomForest implements SoftClassifier<double[]> {
             for (int i = 0; i < n; i++) {
                 if (samples[i] == 0) {
                     oob++;
-                    int p = tree.predict(x[i]);
+                    int p = labelMap.sparseLabelToDenseLabel(tree.predict(x[i]));
                     if (p == y[i]) correct++;
                     synchronized (prediction[i]) {
                         prediction[i][p]++;
@@ -634,24 +643,13 @@ public class RandomForest implements SoftClassifier<double[]> {
         }
 
         // class label set.
-        int[] labels = Math.unique(y);
-        Arrays.sort(labels);
-        
-        for (int i = 0; i < labels.length; i++) {
-            if (labels[i] < 0) {
-                throw new IllegalArgumentException("Negative class label: " + labels[i]); 
-            }
-            
-            if (i > 0 && labels[i] - labels[i-1] > 1) {
-                throw new IllegalArgumentException("Missing class: " + (labels[i-1]+1));
-            }
-        }
-
-        k = labels.length;
+        labelMap = new SparseClassMap(y);
+        y = labelMap.sparseLabelsToDenseLabels(y);
+        k = labelMap.numberOfClasses();
         if (k < 2) {
             throw new IllegalArgumentException("Only one class.");            
         }
-        
+
         if (attributes == null) {
             int p = x[0].length;
             attributes = new Attribute[p];
@@ -670,7 +668,7 @@ public class RandomForest implements SoftClassifier<double[]> {
         int[][] order = SmileUtils.sort(attributes, x);
         List<TrainingTask> tasks = new ArrayList<>();
         for (int i = 0; i < ntrees; i++) {
-            tasks.add(new TrainingTask(attributes, x, y, maxNodes, nodeSize, mtry, subsample, rule, classWeight, order, prediction));
+            tasks.add(new TrainingTask(attributes, x, y, maxNodes, nodeSize, mtry, subsample, rule, classWeight, order, prediction, labelMap));
         }
         
         try {
@@ -772,31 +770,31 @@ public class RandomForest implements SoftClassifier<double[]> {
         int[] y = new int[k];
         
         for (Tree tree : trees) {
-            y[tree.tree.predict(x)]++;
+            y[labelMap.sparseLabelToDenseLabel(tree.tree.predict(x))]++;
         }
         
-        return Math.whichMax(y);
+        return labelMap.denseLabelToSparseLabel(Math.whichMax(y));
     }
     
     @Override
     public int predict(double[] x, double[] posteriori) {
-        if (posteriori.length != k) {
-            throw new IllegalArgumentException(String.format("Invalid posteriori vector size: %d, expected: %d", posteriori.length, k));
+        if (posteriori.length < labelMap.maxSparseLabel() + 1) {
+            throw new IllegalArgumentException(String.format("Invalid posteriori vector size: %d, expected at least: %d", posteriori.length, labelMap.maxSparseLabel() + 1));
+        } else if (posteriori.length != k) {
+            Arrays.fill(posteriori, 0.0);
         }
 
-        Arrays.fill(posteriori, 0.0);
-
         int[] y = new int[k];
-        double[] pos = new double[k];
+        double[] pos = new double[posteriori.length];
         for (Tree tree : trees) {
-            y[tree.tree.predict(x, pos)]++;
-            for (int i = 0; i < k; i++) {
+            y[labelMap.sparseLabelToDenseLabel(tree.tree.predict(x, pos))]++;
+            for (int i = 0; i < posteriori.length; i++) {
                 posteriori[i] += tree.weight * pos[i];
             }
         }
 
         Math.unitize1(posteriori);
-        return Math.whichMax(y);
+        return labelMap.denseLabelToSparseLabel(Math.whichMax(y));
     }    
     
     /**
@@ -818,8 +816,8 @@ public class RandomForest implements SoftClassifier<double[]> {
         
         for (int i = 0; i < T; i++) {
             for (int j = 0; j < n; j++) {
-                prediction[j][trees.get(i).tree.predict(x[j])]++;
-                label[j] = Math.whichMax(prediction[j]);
+                prediction[j][labelMap.sparseLabelToDenseLabel(trees.get(i).tree.predict(x[j]))]++;
+                label[j] = labelMap.denseLabelToSparseLabel(Math.whichMax(prediction[j]));
             }
 
             accuracy[i] = measure.measure(y, label);
@@ -847,8 +845,8 @@ public class RandomForest implements SoftClassifier<double[]> {
 
         for (int i = 0; i < T; i++) {
             for (int j = 0; j < n; j++) {
-                prediction[j][trees.get(i).tree.predict(x[j])]++;
-                label[j] = Math.whichMax(prediction[j]);
+                prediction[j][labelMap.sparseLabelToDenseLabel(trees.get(i).tree.predict(x[j]))]++;
+                label[j] = labelMap.denseLabelToSparseLabel(Math.whichMax(prediction[j]));
             }
 
             for (int j = 0; j < m; j++) {
